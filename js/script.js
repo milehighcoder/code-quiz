@@ -22,8 +22,7 @@ var questions = [
     question: "Where is the correct place to insert a JavaScript?",
     a: "The head section",
     b: "The body section",
-    c:
-      "Both A and B",
+    c: "Both A and B",
     answer: "c",
   },
   {
@@ -44,15 +43,15 @@ var questions = [
   },
 ];
 
-// console.log(questions)
-
 function get(x) {
   return document.getElementById(x);
 }
 
+// enables the 'start quiz' button to start the quiz
 function start() {
-  console.log("start button clicked");
   get("start-button").setAttribute("style", "display: none");
+  get("quiz-title").setAttribute("style", "display: none");
+  get("quiz-inst").setAttribute("style", "display: none");
   get("show-quiz").setAttribute("style", "display: block !important");
   renderQuestion();
 }
@@ -61,12 +60,12 @@ function renderQuestion() {
   test = get("test");
   if (testPosition >= questions.length) {
     test.innerHTML =
-      "<h2>You got " +
+      "<h3>you got " +
       correctAnswers +
       " of " +
       questions.length +
-      " questions correct</h2>";
-    get("test-progress").innerHTML = "Test completed";
+      " questions correct</h3>";
+    get("test-progress").innerHTML = "<h2>test completed</h2>";
     // resets the variable to allow users to restart the test
     testPosition = 0;
     correctAnswers = 0;
@@ -74,7 +73,7 @@ function renderQuestion() {
     return false;
   }
   get("test-progress").innerHTML =
-    "Question " + (testPosition + 1) + " of " + questions.length;
+    "question " + (testPosition + 1) + " of " + questions.length;
 
   question = questions[testPosition].question;
   choiceA = questions[testPosition].a;

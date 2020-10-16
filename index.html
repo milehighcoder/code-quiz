@@ -15,18 +15,21 @@
   </head>
   <body>
     <div>
-      <h1>&lt;coding quiz challenge&gt;</h1>
-      <p>
+      <h1 id='quiz-title'>&lt;coding quiz challenge&gt;</h1>
+      <p id='quiz-inst'>
         Try to answer the following coding questions within the time limit.
-        <br />Incorrect answers will subtract 10 seconds from your overall quiz time.
+        <br />Incorrect answers will subtract 10 seconds from your overall quiz
+        time.
       </p>
+      <!-- button that starts the quiz -->
       <button id="start-button" type="button">start quiz</button>
     </div>
+    <!-- shows the quiz questions -->
     <div class="d-none" id="show-quiz">
       <h2 id="test-progress"></h2>
       <div id="test"></div>
+      <aside id="timer"></aside>
     </div>
-    <aside id="timer"></aside>
     <script src="js/script.js"></script>
   </body>
 </html>
