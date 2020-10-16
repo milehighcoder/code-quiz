@@ -8,7 +8,7 @@ var choicesPossible;
 var choiceA;
 var choiceB;
 var choiceC;
-var quizTimer = 30;
+var quizTimer = 45;
 
 var questions = [
   {
@@ -53,19 +53,17 @@ function start() {
   get("quiz-title").setAttribute("style", "display: none");
   get("quiz-inst").setAttribute("style", "display: none");
   get("show-quiz").setAttribute("style", "display: block !important");
+  setInterval(function () {
+    if (quizTimer <= 0) {
+      clearInterval(quizTimer);
+      get("timer").innerHTML = "time expired";
+    } else {
+      get("timer").innerHTML = quizTimer;
+    }
+    quizTimer -= 1;
+  }, 1000);
   renderQuestion();
 }
-
-// quiz timer
-var loadTimer = setInterval(function () {
-  if (quizTimer <= 0) {
-    clearInterval(quizTimer);
-    get("timer").innerHTML = "finished";
-  } else {
-    get("timer").innerHTML = 'time: ' + quizTimer;
-  }
-  quizTimer -= 1;
-}, 1000);
 
 function renderQuestion() {
   test = get("test");
