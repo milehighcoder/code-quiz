@@ -8,6 +8,7 @@ var choicesPossible;
 var choiceA;
 var choiceB;
 var choiceC;
+var quizTimer = 45;
 
 var questions = [
   {
@@ -22,7 +23,7 @@ var questions = [
     a: "The head section",
     b: "The body section",
     c:
-      "Both the head section and the body section are acceptable places to insert a JavaScript",
+      "Both A and B",
     answer: "c",
   },
   {
@@ -30,7 +31,7 @@ var questions = [
       "Is it necessary for the external script file to contain a &lt;script&gt; tag?",
     a: "Yes",
     b: "No",
-    c: "It depends",
+    c: "Sometimes",
     answer: "b",
   },
   {
@@ -49,15 +50,22 @@ function get(x) {
   return document.getElementById(x);
 }
 
+function start() {
+  console.log("start button clicked");
+  get("start-button").setAttribute("style", "display: none");
+  get("show-quiz").setAttribute("style", "display: block !important");
+  renderQuestion();
+}
+
 function renderQuestion() {
   test = get("test");
   if (testPosition >= questions.length) {
     test.innerHTML =
-      "<h1>You got " +
+      "<h2>You got " +
       correctAnswers +
       " of " +
       questions.length +
-      " questions correct</h1>";
+      " questions correct</h2>";
     get("test-progress").innerHTML = "Test completed";
     // resets the variable to allow users to restart the test
     testPosition = 0;
@@ -66,14 +74,14 @@ function renderQuestion() {
     return false;
   }
   get("test-progress").innerHTML =
-    "question " + (testPosition + 1) + " of " + questions.length;
+    "Question " + (testPosition + 1) + " of " + questions.length;
 
   question = questions[testPosition].question;
   choiceA = questions[testPosition].a;
   choiceB = questions[testPosition].b;
   choiceC = questions[testPosition].c;
   // display the question
-  test.innerHTML = "<h2>" + question + "</h2>";
+  test.innerHTML = "<h3>" + question + "</h3>";
   // display the answer options
   // the += appends to the data we started on the line above
   test.innerHTML +=
@@ -88,7 +96,8 @@ function renderQuestion() {
     "<label> <input type='radio' name='choicesPossible' value='c'> " +
     choiceC +
     "</label><br><br>";
-  test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+  test.innerHTML += "<button onclick='checkAnswer()'>submit answer</button>";
+  get("timer").innerHTML = quizTimer;
 }
 
 function checkAnswer() {
@@ -111,4 +120,5 @@ function checkAnswer() {
 }
 
 // Add event listener to call renderQuestion on page load event
-window.addEventListener("load", renderQuestion);
+//window.addEventListener("load", renderQuestion);
+get("start-button").addEventListener("click", start);

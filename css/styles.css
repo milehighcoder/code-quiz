@@ -1,9 +1,54 @@
 body {
   text-align: center;
+  background-color: #383D45;
 }
 
 h1 {
+  margin-top: 90px;
+  font-family: A Pompadour Sample;
+  color: white;
 }
 
 p {
+  font-family: sans-serif;
+  color: white;
 }
+
+h2 {
+  color: #fff;
+  font-family: A Pompadour Sample;
+}
+
+h3 {
+  color: white;
+  font-family: sans-serif;
+  font-size: 21px;
+}
+
+label {
+  font-family: sans-serif;
+  color: white;
+  font-size: 16px;
+}
+
+aside {
+  text-align: left;
+  margin-left: 20px;
+  margin-top: -440px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #FBC108;
+  font-family: A Pompadour Sample;
+}
+
+button {
+  background-color: #287BFF;
+  color: #fff;
+  font-family: sans-serif;
+  border-radius: 100px;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+}
+
