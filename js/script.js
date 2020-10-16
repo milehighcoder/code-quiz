@@ -8,7 +8,7 @@ var choicesPossible;
 var choiceA;
 var choiceB;
 var choiceC;
-var quizTimer = 45;
+var quizTimer = 30;
 
 var questions = [
   {
@@ -55,6 +55,17 @@ function start() {
   get("show-quiz").setAttribute("style", "display: block !important");
   renderQuestion();
 }
+
+// quiz timer
+var loadTimer = setInterval(function () {
+  if (quizTimer <= 0) {
+    clearInterval(quizTimer);
+    get("timer").innerHTML = "finished";
+  } else {
+    get("timer").innerHTML = 'time: ' + quizTimer;
+  }
+  quizTimer -= 1;
+}, 1000);
 
 function renderQuestion() {
   test = get("test");
