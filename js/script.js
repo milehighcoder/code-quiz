@@ -1,3 +1,4 @@
+// global variables
 var testPosition = 0;
 var correctAnswers = 0;
 var test;
@@ -42,23 +43,34 @@ var questions = [
     c: "&lt;script src='script.js'&gt;",
     answer: "c",
   },
-]
+];
 
-// declares global 'getElementById' function to minimize code
+// allows get(x) to be used in place of getElementById()
 function get(x) {
   return document.getElementById(x);
 }
 
-// hides the intro page and shows the quiz when you click 'start quiz'
+// hides the bootstrap initial form field and 'save results' button during the quiz
+get("input-initials").setAttribute("style", "display: none");
+get("save-results").setAttribute("style", "display: none");
+
+// starts the quiz, timer, and score keeper
 function start() {
-  get("quiz-title").setAttribute("style", "display: none");
-  get("quiz-inst").setAttribute("style", "display: none");
-  get("start-button").setAttribute("style", "display: none");
-  get("show-quiz").setAttribute("style", "display: block !important");
+  get("quiz-title").setAttribute("style", "display: none"); //hides quiz title
+  get("quiz-inst").setAttribute("style", "display: none"); //hides quiz instructions
+  get("start-button").setAttribute("style", "display: none"); //hides start quiz button
+  get("show-quiz").setAttribute("style", "display: block !important"); //shows the quiz
+  // quiz timer
   setInterval(function () {
     if (quizTimer <= 0) {
       clearInterval(quizTimer);
-      get("timer").innerHTML = "time expired";
+      get("test-progress").innerHTML = "<h2>quiz score</h2>";
+      test.innerHTML =
+        Math.round((100 * correctAnswers) / questions.length) + "%";
+      get("timer").setAttribute("style", "display: none"); //hides timer
+      get("input-initials").setAttribute("style", "text-align: center");
+      get("save-results").setAttribute("style", "text-align: center");
+      return false;
     } else {
       get("timer").innerHTML = quizTimer;
     }
@@ -67,25 +79,37 @@ function start() {
   renderQuestion();
 }
 
-// shows the quiz questions and choices
+// shows the quiz questions, choices, and score
 function renderQuestion() {
   test = get("test");
   if (testPosition >= questions.length) {
-    get("test-progress").innerHTML = "<h2>test score</h2>";
-    test.innerHTML = Math.round(100 * correctAnswers/questions.length) + "%";
-    testPosition = 0;
-    correctAnswers = 0;
+    test.innerHTML =
+      Math.round((100 * correctAnswers) / questions.length) + "%";
+    get("timer").setAttribute("style", "display: none");
+    get("input-initials").setAttribute("style", "text-align: center");
+    get("save-results").setAttribute("style", "text-align: center");
+    quizTimer = 0;
     return false;
   }
-  get("test-progress").innerHTML = "question " + (testPosition + 1) + " of " + questions.length;
+  get("test-progress").innerHTML =
+    "question " + (testPosition + 1) + " of " + questions.length;
   question = questions[testPosition].question;
   choiceA = questions[testPosition].a;
   choiceB = questions[testPosition].b;
   choiceC = questions[testPosition].c;
   test.innerHTML = "<h3>" + question + "</h3>";
-  test.innerHTML += "<label><input type='radio' name='choicesPossible' value='a'> " + choiceA + "</label><br>";
-  test.innerHTML += "<label><input type='radio' name='choicesPossible' value='b'> " + choiceB + "</label><br>";
-  test.innerHTML += "<label><input type='radio' name='choicesPossible' value='c'> " + choiceC + "</label><br><br>";
+  test.innerHTML +=
+    "<label><input type='radio' name='choicesPossible' value='a'> " +
+    choiceA +
+    "</label><br>";
+  test.innerHTML +=
+    "<label><input type='radio' name='choicesPossible' value='b'> " +
+    choiceB +
+    "</label><br>";
+  test.innerHTML +=
+    "<label><input type='radio' name='choicesPossible' value='c'> " +
+    choiceC +
+    "</label><br><br>";
   test.innerHTML += "<button onclick='checkAnswer()'>submit answer</button>";
   get("timer").innerHTML = quizTimer;
 }
@@ -100,6 +124,8 @@ function checkAnswer() {
   }
   if (userAnswer == questions[testPosition].answer) {
     correctAnswers++;
+  } else {
+    quizTimer -= 10;
   }
   testPosition++;
   renderQuestion();
