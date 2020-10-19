@@ -25,9 +25,9 @@ This application really broadened my understanding of how to write functions as 
 
 ## resources
 
-Study Group
-Personal Mentor
-Denver University Tutoring Services
-"JavaScript & jQuery: Interactive Front End Development" by Jon Duckett
-https://www.w3schools.com
+Study Group<br>
+Personal Mentor<br>
+Denver University Tutoring Services<br>
+"JavaScript & jQuery: Interactive Front End Development" by Jon Duckett<br>
+https://www.w3schools.com<br>
 https://www.codemahal.com/video/javascript-quiz-tutorial
