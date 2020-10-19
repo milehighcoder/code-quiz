@@ -131,4 +131,15 @@ function checkAnswer() {
   renderQuestion();
 }
 
+// localStorage for the user's quiz results
+function saveResults() {
+  userScore = get("test").textContent;
+  localStorage.setItem("user score", userScore);
+  userInitials = get("input-initials").value;
+  localStorage.setItem("user initials", userInitials);
+  console.log(localStorage.getItem("user score"));
+  console.log(localStorage.getItem("user initials"));
+}
+
 get("start-button").addEventListener("click", start);
+get("save-results").addEventListener("click", saveResults);
