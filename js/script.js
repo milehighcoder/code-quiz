@@ -130,7 +130,7 @@ function checkAnswer() {
   renderQuestion();
 }
 
-// localStorage for the user's quiz results
+// localStorage for the user's quiz results and displays the high score
 function saveResults() {
   userScore = get("test").textContent;
 
