@@ -15,7 +15,7 @@ This application really broadened my understanding of how to write functions as 
 ## URL to deployed application
 
 [Coding Quiz Challenge](https://mychalgm.github.io/code-quiz)<br>
-[Repository](https://https://github.com/mychalgm/code-quiz)
+[Repository](https://github.com/mychalgm/code-quiz)
 
 ## application screenshots
 
