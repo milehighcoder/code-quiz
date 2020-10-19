@@ -50,9 +50,10 @@ function get(x) {
   return document.getElementById(x);
 }
 
-// hides the bootstrap initial form field and 'save results' button during the quiz
+// hides the 'enter initials' form field and 'save results' button during the quiz
 get("input-initials").setAttribute("style", "display: none");
 get("save-results").setAttribute("style", "display: none");
+get("high-score-div").setAttribute("style", "display: none");
 
 // starts the quiz, timer, and score keeper
 function start() {
@@ -65,11 +66,10 @@ function start() {
     if (quizTimer <= 0) {
       clearInterval(quizTimer);
       get("test-progress").innerHTML = "<h2>quiz score</h2>";
-      test.innerHTML =
-        Math.round((100 * correctAnswers) / questions.length) + "%";
+      test.innerHTML = Math.round((100 * correctAnswers) / questions.length);
       get("timer").setAttribute("style", "display: none"); //hides timer
-      get("input-initials").setAttribute("style", "text-align: center");
-      get("save-results").setAttribute("style", "text-align: center");
+      get("input-initials").setAttribute("style", "text-align: center"); //centers 'enter initials' form field
+      get("save-results").setAttribute("style", "text-align: center"); //centers 'save results' button
       return false;
     } else {
       get("timer").innerHTML = quizTimer;
@@ -83,8 +83,7 @@ function start() {
 function renderQuestion() {
   test = get("test");
   if (testPosition >= questions.length) {
-    test.innerHTML =
-      Math.round((100 * correctAnswers) / questions.length) + "%";
+    test.innerHTML = Math.round((100 * correctAnswers) / questions.length);
     get("timer").setAttribute("style", "display: none");
     get("input-initials").setAttribute("style", "text-align: center");
     get("save-results").setAttribute("style", "text-align: center");
@@ -134,12 +133,23 @@ function checkAnswer() {
 // localStorage for the user's quiz results
 function saveResults() {
   userScore = get("test").textContent;
-  localStorage.setItem("user score", userScore);
-  userInitials = get("input-initials").value;
-  localStorage.setItem("user initials", userInitials);
-  console.log(localStorage.getItem("user score"));
-  console.log(localStorage.getItem("user initials"));
+
+  if (
+    localStorage.getItem("user score") === null ||
+    userScore > parseFloat(localStorage.getItem("user score"))
+  ) {
+    localStorage.setItem("user score", userScore);
+    userInitials = get("input-initials").value;
+    localStorage.setItem("user initials", userInitials);
+  }
+  var topInitials = localStorage.getItem("user initials");
+  var topScore = localStorage.getItem("user score");
+  get("high-score").textContent = topInitials + " " + topScore;
+  get("high-score-div").setAttribute("style", "text-align: center"); //centers high score div
+  get("high-score-div").setAttribute("style", "margin-top: 20px"); //centers high score div
 }
 
+// start quiz button click
 get("start-button").addEventListener("click", start);
+// save results button click
 get("save-results").addEventListener("click", saveResults);
